@@ -2,7 +2,7 @@
   "name": "todo",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://vocarista.github.io/todo",
+  "homepage": "https://vocarista.github.io/",
   "type": "module",
   "scripts": {
     "predeply": "npm run build",
