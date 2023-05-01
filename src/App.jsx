@@ -65,9 +65,9 @@ function App() {
 
   return (<>
     <div className = "App text-xl font-semibold">
-      <h1 className = "text-5xl my-5 font-extrabold">Write your goals here</h1>
+      <h1 className = "text-5xl my-10 font-extrabold">Write your goals here</h1>
       <input type = "text" id = "textbox" className = "border-2 border-blue-500
-      my-5 w-96 h-10 p-2
+      mb-10 w-96 h-10 p-2
       hover:shadow-sm hover:shadow-blue-500
       focus:shadow-lg focus:shadow-blue-500
       focus:outline-none
@@ -84,7 +84,7 @@ function App() {
           addTask()
         }
       }} />
-      <button id = "add-task" className = "border-2 border-blue-500 h-10 mx-5 px-5 hover:bg-blue-500
+      <button id = "add-task" className = "border-2 border-blue-500 h-10 mx-5 mb-10 px-5 hover:bg-blue-500
       hover:text-white
       transition
       duration-200

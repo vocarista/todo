@@ -17,9 +17,6 @@ body{
   #textbox{
     width: 85vw;
   }
-  hr{
-    visibility: hidden;
-  }
 }
 
 .App{
