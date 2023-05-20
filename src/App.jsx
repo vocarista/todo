@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import { useLocalStorage } from 'react-use'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Task from './components/Task'
+import Context from './helpers/Context'
 import './App.css'
 
 
@@ -14,7 +16,7 @@ function App() {
   const addTask = () => {
     setTodoList(todoList => {
       if (curTask !== ""){
-      return [ ...todoList, curTask ]
+      return [ ...todoList, { taskName: curTask, done: false} ]
       }
       else{
         return todoList
@@ -22,27 +24,6 @@ function App() {
     })
     inputBox.current.value = ""
     setCurTask('')
-  }
-
-  const Task = ( props ) => {
-  
-    const { taskName } = props; 
-    const [status, setStatus] = useState(false)
-
-    const deleteTask = () => {
-      setTodoList(todoList => todoList.filter(task => task !== taskName))
-    }
-  
-    return (
-      <div className = "flex flex-row space-x-2 m-2 py-2 px-5 text-white bg-blue-500 hover:shadow-md hover:shadow-blue-500 duration-200 ease active:scale-95"
-      onClick = {() => setStatus(!status)}>
-        <input type = "checkbox" checked = { status } onChange ={ event => {
-          setStatus(event.target.checked)
-        }}/>
-        { status ? <p className = 'line-through flex-grow px-2'>{ taskName }</p> : <p className = "flex-grow px-2">{ taskName }</p>}
-        <button className = "flex-shrink" onClick = {deleteTask}><FontAwesomeIcon icon = {faTrash} /></button>
-      </div>
-    )
   }
 
   useEffect (() => {
@@ -65,7 +46,7 @@ function App() {
 
   return (<>
     <div className = "App text-xl font-semibold">
-      <h1 className = "text-5xl my-10 font-extrabold">Write your goals here</h1>
+      <h1 className = "text-5xl my-10 font-extrabold text-slate-200">Write your goals here</h1>
       <input type = "text" id = "textbox" className = "border-2 border-blue-500
       mb-10 w-96 h-10 p-2
       hover:shadow-sm hover:shadow-blue-500
@@ -85,6 +66,7 @@ function App() {
         }
       }} />
       <button id = "add-task" className = "border-2 border-blue-500 h-10 mx-5 mb-10 px-5 hover:bg-blue-500
+      text-slate-200
       hover:text-white
       transition
       duration-200
@@ -94,13 +76,15 @@ function App() {
       ease"
       onClick = { addTask }>Add task</button>
       <hr />
+      <Context.Provider value = { todoList, setTodoList } >
       <div id = "tasklist" className = "grid grid-flow-row place-content-center">
         {todoList.map((val, key) => {
           return (
-            <Task taskName = {val} />
+            <Task task = { val } />
           )
         })}
       </div>
+      </Context.Provider>
   </div></>
   )
 }
