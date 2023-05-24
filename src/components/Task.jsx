@@ -32,7 +32,7 @@ const Task = ( props ) => {
           setStatus(event.target.checked)
         }}/>
         { status ? <p className = 'line-through flex-grow px-2'>{ taskName }</p> : <p className = "flex-grow px-2">{ taskName }</p>}
-        <button className = "flex-shrink px-5" onClick = { deleteTask }><FontAwesomeIcon icon = { faTrash } /></button>
+        <button className = "flex-shrink px-4" onClick = { deleteTask }><FontAwesomeIcon icon = { faTrash } /></button>
       </div>
     )
 }
