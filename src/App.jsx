@@ -1,11 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useLocalStorage } from 'react-use'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Task from './components/Task'
-import Context from './helpers/Context'
 import './App.css'
-
 
 function App() {
   const [todoList, setTodoList] = useState([])
@@ -16,7 +12,7 @@ function App() {
   const addTask = () => {
     setTodoList(todoList => {
       if (curTask !== ""){
-      return [ ...todoList, { taskName: curTask, done: false} ]
+      return [ ...todoList, { id: Math.floor((Math.random())*1000000), taskName: curTask, done: false} ]
       }
       else{
         return todoList
@@ -76,15 +72,13 @@ function App() {
       ease"
       onClick = { addTask }>Add task</button>
       <hr />
-      <Context.Provider value = { todoList, setTodoList } >
       <div id = "tasklist" className = "grid grid-flow-row place-content-center">
-        {todoList.map((val, key) => {
+        {todoList.map(task => {
           return (
-            <Task task = { val } />
+            <Task task = { task } setTodoList = { setTodoList } todoList = { todoList }/>
           )
         })}
       </div>
-      </Context.Provider>
   </div></>
   )
 }
